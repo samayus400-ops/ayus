@@ -213,4 +213,148 @@ return;
 }
 
 msg.textContent="Saving...";
-  
+
+try{
+
+const formData=new FormData();
+formData.append("Username",user);
+formData.append("Month",month);
+formData.append("Day",day);
+formData.append("Note",note);
+
+const res=await fetch(API_URL,{method:'POST',body:formData});
+const result=await res.json();
+
+if(result.success){
+
+msg.textContent="Saved successfully ✅";
+
+document.getElementById("username").value="";
+document.getElementById("month").value="";
+document.getElementById("day").value="";
+document.getElementById("note").value="";
+
+loadBirthdays();
+
+}else{
+msg.textContent="Error saving";
+console.error(result);
+
+}
+
+}catch(e){
+
+msg.textContent="Error saving";
+console.error(e);
+
+}
+
+}
+
+function getNextDate(month,day){
+
+const today=new Date();
+today.setHours(0,0,0,0);
+
+const b=new Date(today.getFullYear(),month-1,day);
+
+if(b<today)b.setFullYear(today.getFullYear()+1);
+
+return b;
+}
+
+function getDateSuffix(day){
+
+if(day>=11&&day<=13)return"th";
+
+switch(day%10){
+case 1:return"st";
+case 2:return"nd";
+case 3:return"rd";
+default:return"th";
+}
+}
+
+async function loadBirthdays(){
+
+const list=document.getElementById("birthdayList");
+list.innerHTML="Loading...";
+
+try{
+
+const res=await fetch(API_URL);
+const data=await res.json();
+
+if(!Array.isArray(data))throw new Error("Invalid data");
+
+const upcoming=data.map(b=>({
+username:b.Username,
+month:parseInt(b.Month),
+day:parseInt(b.Day),
+note:b.Note
+}))
+.sort((a,b)=>getNextDate(a.month,a.day)-getNextDate(b.month,b.day))
+.slice(0,3);
+
+const members=await Promise.all(upcoming.map(async b=>{
+
+let avatar="https://taki2023.github.io/taki/default-pawn.png";
+
+try{
+const pj=await fetch("https://api.chess.com/pub/player/"+b.username).then(r=>r.json());
+if(pj.avatar)avatar=pj.avatar;
+}catch(e){}
+
+const nextDate=getNextDate(b.month,b.day);
+
+const today=new Date();
+today.setHours(0,0,0,0);
+
+const diffDays=Math.round((nextDate-today)/(1000*60*60*24));
+
+const suffix=getDateSuffix(b.day);
+
+const countdownText=diffDays===0
+?"TODAY 🎉"
+:`in ${diffDays} day${diffDays>1?'s':''}`;
+
+return{
+username:b.username,
+avatar,
+note:b.note,
+date:`${b.day}${suffix} ${monthNames[b.month-1]} • ${countdownText}`,
+today:diffDays===0
+};
+
+}));
+
+list.innerHTML=members.map(m=>`
+<div class="bRow ${m.today?'today':''}">
+<a href="https://www.chess.com/member/${m.username}" target="_blank">
+<img class="bAvatar" src="${m.avatar}">
+<div class="bText">
+<div class="bName">@${m.username}</div>
+<div class="bDate">${m.date}</div>
+<div class="bNote">${m.note||""}</div>
+</div>
+</a>
+</div>
+`).join("");
+
+}catch(e){
+
+list.innerHTML=`<div style="color:#ffb37a;font-size:12px;">Failed to load birthdays</div>`;
+console.error(e);
+
+}
+
+}
+
+window.saveBirthday=saveBirthday;
+
+window.addEventListener("DOMContentLoaded",loadBirthdays);
+
+</script>
+
+</body>
+</html>
