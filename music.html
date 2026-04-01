@@ -1,0 +1,91 @@
+<!-- ══════════════════════════════
+         MUSIC PLAYER (Anime Tunes)
+    ══════════════════════════════ -->
+    <div class="sec-label"><div class="dot"></div>Anime Tunes 🎵</div>
+ 
+    <div class="music-card" id="musicCard">
+ 
+      <!-- NOW PLAYING -->
+      <div class="now-playing-banner">
+        <div class="disc-wrap" id="disc">🎵</div>
+        <div class="track-info">
+          <div class="track-label">Now Playing</div>
+          <div class="track-name" id="trackName">Pick a song below ↓</div>
+        </div>
+        <div class="eq-bars" id="eqBars">
+          <div class="eq-bar paused"></div>
+          <div class="eq-bar paused"></div>
+          <div class="eq-bar paused"></div>
+        </div>
+      </div>
+ 
+      <!-- PROGRESS -->
+      <div class="music-progress-section">
+        <div class="music-progress-track" id="progressTrack">
+          <div class="music-progress-fill" id="progressFill">
+            <div class="music-progress-knob" id="progressKnob"></div>
+          </div>
+        </div>
+        <div class="music-time-row">
+          <span id="timeCur">0:00</span>
+          <span id="timeDur">0:00</span>
+        </div>
+      </div>
+ 
+      <!-- CONTROLS -->
+      <div class="music-controls-row">
+        <button class="mcbtn sm" id="btnPrev" title="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
+          </svg>
+        </button>
+        <button class="mcbtn play" id="btnPlay" title="Play">
+          <svg id="iconPlay" viewBox="0 0 24 24" fill="white" stroke="none">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </button>
+        <button class="mcbtn sm" id="btnNext" title="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+          </svg>
+        </button>
+        <button class="mcbtn sm" id="btnLoop" title="Loop off">
+          <svg id="iconLoop" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+            <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+          </svg>
+        </button>
+        <div class="music-vol-row">
+          <div class="music-vol-icon" id="btnVol" title="Mute">
+            <svg id="iconVol" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </div>
+          <div class="music-vol-track" id="volTrack">
+            <div class="music-vol-fill" id="volFill"></div>
+            <div class="music-vol-knob" id="volKnob"></div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- SEARCH -->
+      <div class="music-search-section">
+        <div class="music-search-label">Search &amp; Add Songs</div>
+        <input class="music-search-input" id="searchInput" type="text" placeholder="🔍  Type a song name...">
+        <div class="music-search-dropdown" id="searchDropdown"></div>
+      </div>
+ 
+      <!-- PLAYLIST -->
+      <div class="music-playlist-section">
+        <div class="music-playlist-label">
+          Queue
+          <span class="music-playlist-count" id="plCount">0</span>
+        </div>
+        <div class="music-playlist-scroll" id="playlist"></div>
+      </div>
+ 
+    </div><!-- /music-card -->
+ 
+    <div class="div"></div>
