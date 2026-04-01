@@ -1,91 +1,224 @@
-<!-- ══════════════════════════════
-         MUSIC PLAYER (Anime Tunes)
-    ══════════════════════════════ -->
-    <div class="sec-label"><div class="dot"></div>Anime Tunes 🎵</div>
- 
-    <div class="music-card" id="musicCard">
- 
-      <!-- NOW PLAYING -->
-      <div class="now-playing-banner">
-        <div class="disc-wrap" id="disc">🎵</div>
-        <div class="track-info">
-          <div class="track-label">Now Playing</div>
-          <div class="track-name" id="trackName">Pick a song below ↓</div>
-        </div>
-        <div class="eq-bars" id="eqBars">
-          <div class="eq-bar paused"></div>
-          <div class="eq-bar paused"></div>
-          <div class="eq-bar paused"></div>
-        </div>
+<div class="sec-label">
+  <div class="dot"></div>Anime Tunes 🎵
+</div>
+
+<div class="music-card" id="musicCard">
+
+  <div class="now-playing-banner">
+    <div class="disc-wrap" id="disc">🎵</div>
+    <div class="track-info">
+      <div class="track-label">Now Playing</div>
+      <div class="track-name" id="trackName">Search and add a track...</div>
+    </div>
+    <div class="eq-bars" id="eqBars">
+      <div class="eq-bar paused"></div>
+      <div class="eq-bar paused"></div>
+      <div class="eq-bar paused"></div>
+    </div>
+  </div>
+
+  <div class="music-progress-section">
+    <div class="music-progress-track" id="progressTrack">
+      <div class="music-progress-fill" id="progressFill">
+        <div class="music-progress-knob" id="progressKnob"></div>
       </div>
- 
-      <!-- PROGRESS -->
-      <div class="music-progress-section">
-        <div class="music-progress-track" id="progressTrack">
-          <div class="music-progress-fill" id="progressFill">
-            <div class="music-progress-knob" id="progressKnob"></div>
-          </div>
-        </div>
-        <div class="music-time-row">
-          <span id="timeCur">0:00</span>
-          <span id="timeDur">0:00</span>
-        </div>
+    </div>
+    <div class="music-time-row">
+      <span id="timeCur">0:00</span>
+      <span id="timeDur">0:00</span>
+    </div>
+  </div>
+
+  <div class="music-controls-row">
+    <button class="mcbtn sm" id="btnPrev" title="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="19 20 9 12 19 4 19 20"></polygon>
+        <line x1="5" y1="19" x2="5" y2="5"></line>
+      </svg>
+    </button>
+    
+    <button class="mcbtn play" id="btnPlay" title="Play">
+      <svg id="iconPlay" viewBox="0 0 24 24" fill="white" stroke="none">
+        <polygon id="playPoly" points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+    </button>
+    
+    <button class="mcbtn sm" id="btnNext" title="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 4 15 12 5 20 5 4"></polygon>
+        <line x1="19" y1="5" x2="19" y2="19"></line>
+      </svg>
+    </button>
+    
+    <button class="mcbtn sm" id="btnLoop" title="Loop off">
+      <svg id="iconLoop" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="17 1 21 5 17 9"></polyline>
+        <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+        <polyline points="7 23 3 19 7 15"></polyline>
+        <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+      </svg>
+    </button>
+
+    <div class="music-vol-row">
+      <div class="music-vol-icon" id="btnVol" title="Mute">
+        <svg id="iconVol" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
       </div>
- 
-      <!-- CONTROLS -->
-      <div class="music-controls-row">
-        <button class="mcbtn sm" id="btnPrev" title="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
-          </svg>
-        </button>
-        <button class="mcbtn play" id="btnPlay" title="Play">
-          <svg id="iconPlay" viewBox="0 0 24 24" fill="white" stroke="none">
-            <polygon points="5 3 19 12 5 21 5 3"/>
-          </svg>
-        </button>
-        <button class="mcbtn sm" id="btnNext" title="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
-          </svg>
-        </button>
-        <button class="mcbtn sm" id="btnLoop" title="Loop off">
-          <svg id="iconLoop" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
-            <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-          </svg>
-        </button>
-        <div class="music-vol-row">
-          <div class="music-vol-icon" id="btnVol" title="Mute">
-            <svg id="iconVol" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-            </svg>
-          </div>
-          <div class="music-vol-track" id="volTrack">
-            <div class="music-vol-fill" id="volFill"></div>
-            <div class="music-vol-knob" id="volKnob"></div>
-          </div>
-        </div>
+      <div class="music-vol-track" id="volTrack">
+        <div class="music-vol-fill" id="volFill" style="width: 80%;"></div>
+        <div class="music-vol-knob" id="volKnob" style="left: 80%;"></div>
       </div>
- 
-      <!-- SEARCH -->
-      <div class="music-search-section">
-        <div class="music-search-label">Search &amp; Add Songs</div>
-        <input class="music-search-input" id="searchInput" type="text" placeholder="🔍  Type a song name...">
-        <div class="music-search-dropdown" id="searchDropdown"></div>
+    </div>
+  </div>
+
+  <div class="music-search-section">
+    <div class="music-search-label">Search &amp; Add Songs</div>
+    <input class="music-search-input" id="searchInput" type="text" placeholder="🔍 Type a song name...">
+    <div class="music-search-dropdown" id="searchDropdown"></div>
+  </div>
+
+  <div class="music-playlist-section">
+    <div class="music-playlist-label">
+      Queue
+      <span class="music-playlist-count" id="plCount">0</span>
+    </div>
+    <div class="music-playlist-scroll" id="playlist">
+      <div class="music-playlist-empty" style="text-align:center; padding:20px; color:#999; font-size:12px;">
+        Queue is empty.
       </div>
- 
-      <!-- PLAYLIST -->
-      <div class="music-playlist-section">
-        <div class="music-playlist-label">
-          Queue
-          <span class="music-playlist-count" id="plCount">0</span>
-        </div>
-        <div class="music-playlist-scroll" id="playlist"></div>
-      </div>
- 
-    </div><!-- /music-card -->
- 
-    <div class="div"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Song Database using your specific sources
+  const songDb = [
+    { name: "LA ESPADA – Eternal Raijin", url: "la_espada.mp3" },
+    { name: "ANIME KRUSH FUNK – 1cyzzz & DJ IRIO", url: "anime_krush.mp3" },
+    { name: "TOKYO FUNK – 1cyzzz", url: "tokyo_funk.mp3" },
+    { name: "TROMPETA FUNK – 1cyzzz", url: "trompeta_funk.mp3" },
+    { name: "MIDNIGHT SHADOWS! – BLL4X", url: "midnight_shadows.mp3" },
+    { name: "Tengen Uzui – KinovariSquad", url: "tengen_uzui.mp3" },
+    { name: "Sukuna x MONTAGEM FIM ESTELAR – Egoism", url: "sukuna.mp3" },
+    { name: "Gojo x FUNK DA NÉVOA – Egoism", url: "gojo.mp3" },
+    { name: "Ichigo's Final Getsuga – DJ Zips", url: "ichigo.mp3" },
+    { name: "Alan Walker - Faded (8D)", url: "8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm) (1).mp3" },
+    { name: "Coldplay - Yellow Acoustic", url: "Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3" },
+    { name: "Ghost - Mary On A Cross", url: "Ghost-Mary-On-A-Cross-(AmkLoaded).mp3" },
+    { name: "Imagine Dragons - Demons", url: "I_magine_Dragons_-_Demons_(mp3.pm).mp3" },
+    { name: "Imagine Dragons - Believer", url: "Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm) (1).mp3" },
+    { name: "Luis Fonsi - Despacito", url: "Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm) (1).mp3" },
+    { name: "Sia - Unstoppable", url: "Sia_-_Im_unstoppable_today_(mp3.pm) (1).mp3" },
+    { name: "Zayde Wolf - MANIAC", url: "ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm) (1).mp3" }
+  ];
+
+  let queue = [];
+  let currentIdx = -1;
+  let isLoop = false;
+  let audio = new Audio();
+
+  const trackName = document.getElementById('trackName');
+  const playPoly = document.getElementById('playPoly');
+  const disc = document.getElementById('disc');
+  const eqBars = document.querySelectorAll('.eq-bar');
+  const playlist = document.getElementById('playlist');
+  const searchInput = document.getElementById('searchInput');
+  const searchDropdown = document.getElementById('searchDropdown');
+  const plCount = document.getElementById('plCount');
+
+  function playSong(idx) {
+    if (idx < 0 || idx >= queue.length) return;
+    currentIdx = idx;
+    audio.src = queue[currentIdx].url;
+    audio.play().catch(e => console.log("File not found locally."));
+    updateUI();
+  }
+
+  function updateUI() {
+    trackName.innerText = queue[currentIdx].name;
+    const isPlaying = !audio.paused;
+    playPoly.setAttribute('points', isPlaying ? "5 4 10 4 10 20 5 20 5 4 14 4 19 4 19 20 14 20 14 4" : "5 3 19 12 5 21 5 3");
+    disc.classList.toggle('playing', isPlaying);
+    eqBars.forEach(b => b.classList.toggle('paused', !isPlaying));
+    renderQueue();
+  }
+
+  document.getElementById('btnPlay').onclick = () => {
+    if (currentIdx === -1 && queue.length > 0) playSong(0);
+    else if (audio.paused) audio.play();
+    else audio.pause();
+    updateUI();
+  };
+
+  document.getElementById('btnNext').onclick = () => { if (currentIdx < queue.length - 1) playSong(currentIdx + 1); };
+  document.getElementById('btnPrev').onclick = () => { if (currentIdx > 0) playSong(currentIdx - 1); };
+  
+  document.getElementById('btnLoop').onclick = function() {
+    isLoop = !isLoop;
+    this.classList.toggle('active', isLoop);
+  };
+
+  audio.ontimeupdate = () => {
+    const pct = (audio.currentTime / audio.duration) * 100 || 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('timeCur').innerText = formatTime(audio.currentTime);
+    document.getElementById('timeDur').innerText = audio.duration ? formatTime(audio.duration) : "0:00";
+  };
+
+  function formatTime(secs) {
+    let m = Math.floor(secs / 60);
+    let s = Math.floor(secs % 60);
+    return m + ":" + (s < 10 ? '0' + s : s);
+  }
+
+  audio.onended = () => isLoop ? audio.play() : (currentIdx < queue.length - 1 ? playSong(currentIdx + 1) : null);
+
+  searchInput.oninput = () => {
+    const val = searchInput.value.toLowerCase();
+    searchDropdown.innerHTML = '';
+    if (!val) { searchDropdown.style.display = 'none'; return; }
+    const matches = songDb.filter(s => s.name.toLowerCase().includes(val));
+    matches.forEach(s => {
+      const d = document.createElement('div');
+      d.className = 'search-item';
+      d.style.padding = "10px";
+      d.style.cursor = "pointer";
+      d.style.fontSize = "12px";
+      d.style.borderBottom = "1px solid #eee";
+      d.innerText = s.name;
+      d.onclick = () => {
+        queue.push(s);
+        renderQueue();
+        if (currentIdx === -1) playSong(queue.length - 1);
+        searchInput.value = '';
+        searchDropdown.style.display = 'none';
+      };
+      searchDropdown.appendChild(d);
+    });
+    searchDropdown.style.display = matches.length ? 'block' : 'none';
+  };
+
+  function renderQueue() {
+    plCount.innerText = queue.length;
+    if (queue.length === 0) {
+      playlist.innerHTML = '<div style="text-align:center; padding:20px; color:#999; font-size:12px;">Queue is empty.</div>';
+      return;
+    }
+    playlist.innerHTML = '';
+    queue.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = `pl-item ${i === currentIdx ? 'active' : ''}`;
+      div.style.padding = "10px";
+      div.style.fontSize = "12px";
+      div.style.cursor = "pointer";
+      div.style.background = i === currentIdx ? "#fff1f0" : "transparent";
+      div.innerText = (i + 1) + ". " + s.name;
+      div.onclick = () => playSong(i);
+      playlist.appendChild(div);
+    });
+  }
+</script>
