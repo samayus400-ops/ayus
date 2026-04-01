@@ -1,224 +1,188 @@
-<div class="sec-label">
-  <div class="dot"></div>Anime Tunes 🎵
-</div>
-
-<div class="music-card" id="musicCard">
-
-  <div class="now-playing-banner">
-    <div class="disc-wrap" id="disc">🎵</div>
-    <div class="track-info">
-      <div class="track-label">Now Playing</div>
-      <div class="track-name" id="trackName">Search and add a track...</div>
-    </div>
-    <div class="eq-bars" id="eqBars">
-      <div class="eq-bar paused"></div>
-      <div class="eq-bar paused"></div>
-      <div class="eq-bar paused"></div>
-    </div>
+/* ── MUSIC PLAYER ── */
+.music-card{
+  background:#fff;border-radius:18px;border:2px solid #f5c5b8;
+  padding:14px;font-family:'Nunito',sans-serif;
+  position:relative;overflow:hidden;box-shadow:0 4px 0 #e8aa98;margin-bottom:4px;
+}
+.now-playing-banner{
+  background:linear-gradient(135deg,#d93020 0%,#e85535 55%,#ef6640 100%);
+  border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:11px;
+  margin-bottom:11px;position:relative;overflow:hidden;
+  border:2px solid rgba(255,255,255,0.2);box-shadow:0 4px 0 #8c1a10;
+}
+.now-playing-banner::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-55deg,transparent,transparent 12px,rgba(255,255,255,0.05) 12px,rgba(255,255,255,0.05) 24px);
+  pointer-events:none;
+}
+.disc-wrap{
+  width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.2);
+  border:2.5px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;z-index:1;font-size:18px;
+}
+.disc-wrap.spinning{animation:spinDisc 3.5s linear infinite;}
+@keyframes spinDisc{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.track-info{flex:1;min-width:0;position:relative;z-index:1;overflow:hidden;}
+.track-label{font-size:var(--fs-xs);font-weight:900;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:1.25px;margin-bottom:3px;}
+.track-name{font-size:var(--fs-xs);font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 3px rgba(0,0,0,0.3);}
+.eq-bars{display:flex;align-items:flex-end;gap:2px;height:18px;position:relative;z-index:1;flex-shrink:0;}
+.eq-bar{width:4px;border-radius:2px 2px 0 0;background:rgba(255,255,255,0.75);animation:eqBounce 0.8s ease-in-out infinite alternate;}
+.eq-bar:nth-child(1){height:6px;animation-delay:0s;}
+.eq-bar:nth-child(2){height:14px;animation-delay:.15s;}
+.eq-bar:nth-child(3){height:9px;animation-delay:.3s;}
+.eq-bar.paused{animation-play-state:paused;}
+@keyframes eqBounce{to{height:18px;}}
+ 
+/* Progress */
+.music-progress-section{margin-bottom:10px;}
+.music-progress-track{
+  width:100%;height:9px;background:#fce8e0;border-radius:999px;
+  border:2px solid #f5c5b8;cursor:pointer;position:relative;overflow:visible;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,0.06);
+}
+.music-progress-fill{
+  height:100%;background:linear-gradient(90deg,#d93020,#e85535,#ef6640);
+  border-radius:999px;width:0%;position:relative;transition:width .1s linear;
+}
+.music-progress-fill::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent,transparent 8px,rgba(255,255,255,0.2) 8px,rgba(255,255,255,0.2) 14px);
+  border-radius:999px;
+}
+.music-progress-knob{
+  position:absolute;right:-7px;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #d93020;
+  box-shadow:0 3px 0 #8c1a10;cursor:pointer;z-index:3;transition:transform .15s;
+}
+.music-progress-knob:hover{transform:translateY(-50%) scale(1.2);}
+.music-time-row{display:flex;justify-content:space-between;font-size:var(--fs-xs);font-weight:900;color:#c73520;margin-top:4px;padding:0 2px;}
+ 
+/* Controls */
+.music-controls-row{display:flex;align-items:center;gap:7px;margin-bottom:11px;flex-wrap:nowrap;}
+.mcbtn{
+  display:flex;align-items:center;justify-content:center;border-radius:50%;cursor:pointer;
+  border:2px solid #f5c5b8;background:#fff8f5;box-shadow:0 4px 0 #e8aa98;
+  transition:all .15s ease;user-select:none;flex-shrink:0;
+  /* FIX 3: prevent SVG children from absorbing pointer events */
+  pointer-events:auto;
+}
+/* FIX 3: SVG children must not intercept clicks */
+.mcbtn svg, .mcbtn svg *{pointer-events:none;}
+.mcbtn:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-2px);box-shadow:0 6px 0 #c73520;}
+.mcbtn:active{transform:translateY(2px);box-shadow:0 2px 0 #c73520;}
+.mcbtn svg{display:block;flex-shrink:0;}
+.mcbtn.sm{width:22px;height:22px;}
+.mcbtn.sm svg{width:11px;height:11px;}
+.mcbtn.play{width:28px;height:28px;background:linear-gradient(135deg,#d93020,#e85535);border:none;box-shadow:0 5px 0 #8c1a10;}
+.mcbtn.play svg{width:12px;height:12px;}
+.mcbtn.play:hover{transform:translateY(-2px);box-shadow:0 7px 0 #8c1a10;background:linear-gradient(135deg,#c02010,#d94030);}
+.mcbtn.play:active{transform:translateY(2px);box-shadow:0 2px 0 #8c1a10;}
+.mcbtn.loop-on{background:linear-gradient(135deg,#d93020,#ef6640);border:none;box-shadow:0 4px 0 #8c1a10;}
+.mcbtn.loop-on svg{color:#fff !important;}
+.mcbtn.loop-on:hover{background:linear-gradient(135deg,#c02010,#e85535);box-shadow:0 6px 0 #8c1a10;}
+ 
+/* Volume */
+.music-vol-row{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0;}
+.music-vol-icon{
+  width:28px;height:28px;border-radius:50%;border:2px solid #f5c5b8;background:#fff8f5;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 3px 0 #e8aa98;transition:all .15s;flex-shrink:0;
+}
+.music-vol-icon:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-1px);}
+.music-vol-icon svg{width:13px;height:13px;color:#c73520;pointer-events:none;}
+.music-vol-track{width:46px;height:8px;background:#fce8e0;border-radius:999px;border:2px solid #f5c5b8;cursor:pointer;position:relative;flex-shrink:0;}
+.music-vol-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#a855f7);border-radius:999px;width:70%;}
+.music-vol-knob{
+  position:absolute;top:50%;transform:translateY(-50%);left:calc(70% - 6px);
+  width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid #7c3aed;
+  cursor:pointer;z-index:2;box-shadow:0 2px 0 #5b21b6;
+}
+ 
+/* Search */
+.music-search-section{margin-bottom:10px;position:relative;}
+.music-search-label{font-size:var(--fs-xs);font-weight:900;color:#c73520;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.music-search-label::after{content:'';flex:1;height:1.5px;background:#f5c5b8;border-radius:1px;}
+.music-search-input{
+  width:100%;padding:8px 12px;border-radius:12px;border:2px solid #f5c5b8;
+  background:#fff8f5;color:#8c1a10;font-size:var(--fs-sm);font-family:'Nunito',sans-serif;font-weight:700;
+  outline:none;transition:border-color .15s,box-shadow .15s;
+}
+.music-search-input::placeholder{color:#e8aa98;font-weight:600;}
+.music-search-input:focus{border-color:#d93020;box-shadow:0 0 0 3px rgba(217,48,32,.12);}
+.music-search-dropdown{
+  margin-top:5px;border-radius:12px;border:2px solid #f5c5b8;background:#fff8f5;
+  overflow-y:auto;max-height:160px;display:none;position:absolute;
+  left:0;right:0;z-index:100;
+  box-shadow:0 8px 24px rgba(217,48,32,.15);
+}
+.music-search-dropdown::-webkit-scrollbar{width:5px;}
+.music-search-dropdown::-webkit-scrollbar-thumb{background:#d93020;border-radius:3px;}
+.music-search-dropdown::-webkit-scrollbar-track{background:#fce8e0;border-radius:3px;}
+.music-search-dropdown{scrollbar-width:thin;scrollbar-color:#d93020 #fce8e0;}
+.music-search-dropdown.open{display:block;}
+.music-search-item{
+  display:flex;align-items:center;gap:8px;padding:7px 10px;cursor:pointer;
+  font-size:var(--fs-sm);font-weight:700;color:#8c1a10;
+  border-bottom:1.5px solid #fce8e0;transition:background .12s;
+}
+.music-search-item:last-child{border-bottom:none;}
+.music-search-item:hover{background:#fce8e0;}
+.music-search-item-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.music-search-badge{font-size:var(--fs-xs);font-weight:900;padding:2px 8px;border-radius:999px;flex-shrink:0;}
+.music-search-badge.add{background:#fce8e0;color:#c73520;border:1.5px solid #f5c5b8;}
+.music-search-badge.done{background:#dcfce7;color:#166534;border:1.5px solid #86efac;}
+ 
+/* Playlist */
+.music-playlist-section{margin-top:4px;}
+.music-playlist-label{font-size:var(--fs-xs);font-weight:900;color:#c73520;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.music-playlist-label::after{content:'';flex:1;height:1.5px;background:#f5c5b8;border-radius:1px;}
+.music-playlist-count{font-size:var(--fs-xs);font-weight:900;padding:1px 7px;border-radius:999px;background:#fce8e0;color:#c73520;border:1.5px solid #f5c5b8;}
+.music-playlist-scroll{height:130px;overflow-y:auto;padding-right:2px;}
+.music-playlist-scroll::-webkit-scrollbar{width:5px;}
+.music-playlist-scroll::-webkit-scrollbar-thumb{background:#d93020;border-radius:3px;}
+.music-playlist-scroll::-webkit-scrollbar-track{background:#fce8e0;border-radius:3px;}
+.music-playlist-item{
+  display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:12px;margin-bottom:4px;
+  cursor:pointer;background:#fff8f5;border:2px solid #f5c5b8;
+  transition:all .14s ease;font-size:var(--fs-sm);font-weight:700;color:#8c1a10;overflow:hidden;
+}
+.music-playlist-item:hover{background:#fce8e0;border-color:#d93020;transform:translateY(-1px);box-shadow:0 3px 0 #e8aa98;}
+.music-playlist-item.active{background:linear-gradient(135deg,rgba(217,48,32,.08),rgba(239,102,64,.08));border-color:#d93020;box-shadow:0 3px 0 #e8aa98;}
+.music-pl-num{font-size:var(--fs-xs);font-weight:900;color:#e85535;min-width:18px;flex-shrink:0;}
+.music-pl-icon{font-size:12px;flex-shrink:0;}
+.music-pl-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+.music-pl-remove{font-size:11px;color:#e8aa98;cursor:pointer;padding:0 3px;transition:color .15s;flex-shrink:0;line-height:1;}
+.music-pl-remove:hover{color:#d93020;}
+.music-playlist-empty{text-align:center;padding:20px 0;font-size:var(--fs-sm);font-weight:800;color:#e8aa98;}
+.music-playlist-empty span{display:block;font-size:24px;margin-bottom:6px;}
+ 
+@media(min-width:600px){
+  .music-card{max-width:420px;margin-left:auto;margin-right:auto;}
+}
+</style>
+</head>
+ 
+<body>
+<div class="sb">
+ 
+  <div class="sb-top">
+    <div class="chilli-deco left">🌶</div>
+    <div class="chilli-deco right">♞</div>
+    <div class="club-title">🌶 Hot Chilli CheckMate</div>
+    <div class="club-sub">Your chess home ♡</div>
   </div>
-
-  <div class="music-progress-section">
-    <div class="music-progress-track" id="progressTrack">
-      <div class="music-progress-fill" id="progressFill">
-        <div class="music-progress-knob" id="progressKnob"></div>
+ 
+  <div class="inner">
+ 
+    <!-- WELCOME -->
+    <div style="text-align:center;margin-top:-14px;margin-bottom:10px;">
+      <div style="font-family:'Fredoka One',cursive;font-size:16px;color:#c73520;margin-bottom:6px;text-shadow:0 1px 0 rgba(0,0,0,.1);">
+        Welcome on board 🌶♞
+      </div>
+      <img src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/Taki/phpadinvpg1t18g8wzNcfy.gif"
+        style="width:100%;border-radius:16px;border:2px solid #e8553a;box-shadow:0 6px 18px rgba(200,50,20,.25);">
+      <div style="font-size:var(--fs-xs);font-weight:700;color:#9a2010;margin-top:6px;">
+        Play sharp. Think spicy. Win big.
       </div>
     </div>
-    <div class="music-time-row">
-      <span id="timeCur">0:00</span>
-      <span id="timeDur">0:00</span>
-    </div>
-  </div>
-
-  <div class="music-controls-row">
-    <button class="mcbtn sm" id="btnPrev" title="Previous">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="19 20 9 12 19 4 19 20"></polygon>
-        <line x1="5" y1="19" x2="5" y2="5"></line>
-      </svg>
-    </button>
-    
-    <button class="mcbtn play" id="btnPlay" title="Play">
-      <svg id="iconPlay" viewBox="0 0 24 24" fill="white" stroke="none">
-        <polygon id="playPoly" points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
-    </button>
-    
-    <button class="mcbtn sm" id="btnNext" title="Next">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="5 4 15 12 5 20 5 4"></polygon>
-        <line x1="19" y1="5" x2="19" y2="19"></line>
-      </svg>
-    </button>
-    
-    <button class="mcbtn sm" id="btnLoop" title="Loop off">
-      <svg id="iconLoop" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="17 1 21 5 17 9"></polyline>
-        <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-        <polyline points="7 23 3 19 7 15"></polyline>
-        <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-      </svg>
-    </button>
-
-    <div class="music-vol-row">
-      <div class="music-vol-icon" id="btnVol" title="Mute">
-        <svg id="iconVol" viewBox="0 0 24 24" fill="none" stroke="#c73520" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-      </div>
-      <div class="music-vol-track" id="volTrack">
-        <div class="music-vol-fill" id="volFill" style="width: 80%;"></div>
-        <div class="music-vol-knob" id="volKnob" style="left: 80%;"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="music-search-section">
-    <div class="music-search-label">Search &amp; Add Songs</div>
-    <input class="music-search-input" id="searchInput" type="text" placeholder="🔍 Type a song name...">
-    <div class="music-search-dropdown" id="searchDropdown"></div>
-  </div>
-
-  <div class="music-playlist-section">
-    <div class="music-playlist-label">
-      Queue
-      <span class="music-playlist-count" id="plCount">0</span>
-    </div>
-    <div class="music-playlist-scroll" id="playlist">
-      <div class="music-playlist-empty" style="text-align:center; padding:20px; color:#999; font-size:12px;">
-        Queue is empty.
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<script>
-  // Song Database using your specific sources
-  const songDb = [
-    { name: "LA ESPADA – Eternal Raijin", url: "la_espada.mp3" },
-    { name: "ANIME KRUSH FUNK – 1cyzzz & DJ IRIO", url: "anime_krush.mp3" },
-    { name: "TOKYO FUNK – 1cyzzz", url: "tokyo_funk.mp3" },
-    { name: "TROMPETA FUNK – 1cyzzz", url: "trompeta_funk.mp3" },
-    { name: "MIDNIGHT SHADOWS! – BLL4X", url: "midnight_shadows.mp3" },
-    { name: "Tengen Uzui – KinovariSquad", url: "tengen_uzui.mp3" },
-    { name: "Sukuna x MONTAGEM FIM ESTELAR – Egoism", url: "sukuna.mp3" },
-    { name: "Gojo x FUNK DA NÉVOA – Egoism", url: "gojo.mp3" },
-    { name: "Ichigo's Final Getsuga – DJ Zips", url: "ichigo.mp3" },
-    { name: "Alan Walker - Faded (8D)", url: "8D_TOP_MUSIC_-_Alan_Walker_-_Faded_(mp3.pm) (1).mp3" },
-    { name: "Coldplay - Yellow Acoustic", url: "Cold_Play_-_Yellow_Accoustic_(mp3.pm).mp3" },
-    { name: "Ghost - Mary On A Cross", url: "Ghost-Mary-On-A-Cross-(AmkLoaded).mp3" },
-    { name: "Imagine Dragons - Demons", url: "I_magine_Dragons_-_Demons_(mp3.pm).mp3" },
-    { name: "Imagine Dragons - Believer", url: "Imagine_Dragons_-_Believer_NPBM2020_(mp3.pm) (1).mp3" },
-    { name: "Luis Fonsi - Despacito", url: "Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_-_Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_(mp3.pm) (1).mp3" },
-    { name: "Sia - Unstoppable", url: "Sia_-_Im_unstoppable_today_(mp3.pm) (1).mp3" },
-    { name: "Zayde Wolf - MANIAC", url: "ZAYDE_WOLF_SAM_TINNESZ_EDVN_-_MANIAC_(mp3.pm) (1).mp3" }
-  ];
-
-  let queue = [];
-  let currentIdx = -1;
-  let isLoop = false;
-  let audio = new Audio();
-
-  const trackName = document.getElementById('trackName');
-  const playPoly = document.getElementById('playPoly');
-  const disc = document.getElementById('disc');
-  const eqBars = document.querySelectorAll('.eq-bar');
-  const playlist = document.getElementById('playlist');
-  const searchInput = document.getElementById('searchInput');
-  const searchDropdown = document.getElementById('searchDropdown');
-  const plCount = document.getElementById('plCount');
-
-  function playSong(idx) {
-    if (idx < 0 || idx >= queue.length) return;
-    currentIdx = idx;
-    audio.src = queue[currentIdx].url;
-    audio.play().catch(e => console.log("File not found locally."));
-    updateUI();
-  }
-
-  function updateUI() {
-    trackName.innerText = queue[currentIdx].name;
-    const isPlaying = !audio.paused;
-    playPoly.setAttribute('points', isPlaying ? "5 4 10 4 10 20 5 20 5 4 14 4 19 4 19 20 14 20 14 4" : "5 3 19 12 5 21 5 3");
-    disc.classList.toggle('playing', isPlaying);
-    eqBars.forEach(b => b.classList.toggle('paused', !isPlaying));
-    renderQueue();
-  }
-
-  document.getElementById('btnPlay').onclick = () => {
-    if (currentIdx === -1 && queue.length > 0) playSong(0);
-    else if (audio.paused) audio.play();
-    else audio.pause();
-    updateUI();
-  };
-
-  document.getElementById('btnNext').onclick = () => { if (currentIdx < queue.length - 1) playSong(currentIdx + 1); };
-  document.getElementById('btnPrev').onclick = () => { if (currentIdx > 0) playSong(currentIdx - 1); };
-  
-  document.getElementById('btnLoop').onclick = function() {
-    isLoop = !isLoop;
-    this.classList.toggle('active', isLoop);
-  };
-
-  audio.ontimeupdate = () => {
-    const pct = (audio.currentTime / audio.duration) * 100 || 0;
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('timeCur').innerText = formatTime(audio.currentTime);
-    document.getElementById('timeDur').innerText = audio.duration ? formatTime(audio.duration) : "0:00";
-  };
-
-  function formatTime(secs) {
-    let m = Math.floor(secs / 60);
-    let s = Math.floor(secs % 60);
-    return m + ":" + (s < 10 ? '0' + s : s);
-  }
-
-  audio.onended = () => isLoop ? audio.play() : (currentIdx < queue.length - 1 ? playSong(currentIdx + 1) : null);
-
-  searchInput.oninput = () => {
-    const val = searchInput.value.toLowerCase();
-    searchDropdown.innerHTML = '';
-    if (!val) { searchDropdown.style.display = 'none'; return; }
-    const matches = songDb.filter(s => s.name.toLowerCase().includes(val));
-    matches.forEach(s => {
-      const d = document.createElement('div');
-      d.className = 'search-item';
-      d.style.padding = "10px";
-      d.style.cursor = "pointer";
-      d.style.fontSize = "12px";
-      d.style.borderBottom = "1px solid #eee";
-      d.innerText = s.name;
-      d.onclick = () => {
-        queue.push(s);
-        renderQueue();
-        if (currentIdx === -1) playSong(queue.length - 1);
-        searchInput.value = '';
-        searchDropdown.style.display = 'none';
-      };
-      searchDropdown.appendChild(d);
-    });
-    searchDropdown.style.display = matches.length ? 'block' : 'none';
-  };
-
-  function renderQueue() {
-    plCount.innerText = queue.length;
-    if (queue.length === 0) {
-      playlist.innerHTML = '<div style="text-align:center; padding:20px; color:#999; font-size:12px;">Queue is empty.</div>';
-      return;
-    }
-    playlist.innerHTML = '';
-    queue.forEach((s, i) => {
-      const div = document.createElement('div');
-      div.className = `pl-item ${i === currentIdx ? 'active' : ''}`;
-      div.style.padding = "10px";
-      div.style.fontSize = "12px";
-      div.style.cursor = "pointer";
-      div.style.background = i === currentIdx ? "#fff1f0" : "transparent";
-      div.innerText = (i + 1) + ". " + s.name;
-      div.onclick = () => playSong(i);
-      playlist.appendChild(div);
-    });
-  }
-</script>
+    <div class="div"></div>
