@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Techno Tony Smile</title>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .captcha-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid #dcdcdc;
+            width: 340px;
+        }
+
+        .tony-wrapper {
+            position: relative;
+            width: 180px;
+            height: 220px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #tony-img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* --- RESPONSE MARKS --- */
+        .reaction-mark {
+            position: absolute;
+            right: -10px;
+            top: 45%;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 5;
+        }
+
+        #checkmark { background: #e8f0fe; color: #7baaf7; }
+        #crossmark { background: #fdeaea; color: #e74c3c; }
+
+        /* --- ANIMATION STATES --- */
+        .is-crying #tony-img { animation: shake 0.4s ease-in-out; }
+        .is-crying #crossmark { opacity: 1; transform: scale(1); }
+
+        .is-happy #tony-img { transform: scale(1.1) translateY(-10px); }
+        .is-happy #checkmark { opacity: 1; transform: scale(1); }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* --- UI STYLING --- */
+        .label { color: #555; font-weight: bold; margin-bottom: 15px; font-size: 15px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+        .input-group { display: flex; gap: 10px; background: #fff; border: 1px solid #ccc; padding: 5px; border-radius: 8px; }
+        input { border: none; outline: none; padding: 10px; flex-grow: 1; font-size: 14px; }
+        button { background: #4285f4; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s; }
+        button:hover { background: #357ae8; }
+        .footer { font-size: 11px; color: #bbb; text-align: left; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <div class="captcha-container">
+        <div id="tony-box" class="tony-wrapper">
+            <img id="tony-img" src="https://i.supaimg.com/4e6ad467-46db-468d-b908-91f8e9bfc020/99d80b6a-8fb5-4847-8d16-54d40841988b.jpg" alt="Tony">
+            <div id="checkmark" class="reaction-mark">✓</div>
+            <div id="crossmark" class="reaction-mark">✕</div>
+        </div>
+
+        <div id="status-label" class="label">Prove you're human.Make Techno Tony smile.</div>
+
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="Talk to Tony...">
+            <button onclick="handleVerify()">Tell Tony</button>
+        </div>
+        <div class="footer">reReCAPTCHA</div>
+    </div>
+
+    <script>
+        const imgNormal = "https://i.supaimg.com/4e6ad467-46db-468d-b908-91f8e9bfc020/99d80b6a-8fb5-4847-8d16-54d40841988b.jpg";
+        const imgHappy = "https://i.supaimg.com/4e6ad467-46db-468d-b908-91f8e9bfc020/744fc805-f7ba-46fc-8858-717dcaae170e.jpg";
+        const imgCrying = "https://i.supaimg.com/4e6ad467-46db-468d-b908-91f8e9bfc020/93f2e17e-3d9d-4f82-be2b-eadbff04898a.jpg";
+
+        // AI Logic Keywords
+        const positiveWords = ["cool", "genius", "smart", "glasses", "handsome", "love", "smile", "great", "awesome", "best"];
+        const negativeWords = ["bad", "ugly", "stupid", "hate", "dumb", "worst", "mean", "boring", "shut up"];
+
+        function handleVerify() {
+            const inputField = document.getElementById('userInput');
+            const wrapper = document.getElementById('tony-box');
+            const tonyImg = document.getElementById('tony-img');
+            const label = document.getElementById('status-label');
+            
+            const text = inputField.value.toLowerCase().trim();
+            if (text === "") return;
+
+            // Reset UI
+            wrapper.classList.remove('is-crying', 'is-happy');
+
+            // Logic: Check for positive or negative sentiment
+            const isPositive = positiveWords.some(word => text.includes(word));
+            const isNegative = negativeWords.some(word => text.includes(word));
+
+            if (isPositive && !isNegative) {
+                // HAPPY STATE
+                tonyImg.src = imgHappy; 
+                wrapper.classList.add('is-happy');
+                label.innerHTML = "Success!<br>Tony is happy now.";
+            } else {
+                // CRYING STATE (Defaults to crying for negative OR non-complimentary words)
+                tonyImg.src = imgCrying;
+                wrapper.classList.add('is-crying');
+                label.innerHTML = "Verification failed.<br>You hurt Tony's feelings.";
+            }
+        }
+
+        document.getElementById('userInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleVerify();
+        });
+    </script>
+</body>
+</html>
