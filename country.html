@@ -1,0 +1,198 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --chess-dark: #262421;
+    --chess-surface: #312e2b;
+    --chess-green: #81b64c;
+    --chess-green-hover: #a3d16a;
+    --chess-text: #ffffff;
+    --chess-text-muted: #bababa;
+  }
+
+  .chess-sidebar {
+    width: 100%;
+    max-width: 300px;
+    background-color: var(--chess-dark);
+    font-family: 'Nunito', sans-serif;
+    color: var(--chess-text);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+
+  .club-header-img {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(45deg, #1e3a8a, #4a90e2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .club-header-img::after {
+    content: "🌎";
+    font-size: 60px;
+  }
+
+  .sidebar-content {
+    padding: 16px;
+  }
+
+  .club-name {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    line-height: 1.2;
+    color: #fff;
+  }
+
+  .club-stats {
+    font-size: 13px;
+    color: var(--chess-text-muted);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--chess-text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 800;
+  }
+
+  /* FOUNDER CARD */
+  .founder-card {
+    background-color: var(--chess-surface);
+    border-radius: 4px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .founder-card:hover {
+    background-color: #3b3834;
+  }
+
+  .founder-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 3px;
+    border: 2px solid var(--chess-green);
+  }
+
+  .founder-info .name {
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--chess-green);
+  }
+
+  .founder-info .role {
+    font-size: 11px;
+    color: var(--chess-text-muted);
+  }
+
+  /* PERSUASIVE DESCRIPTION */
+  .club-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #eee;
+    margin-bottom: 20px;
+  }
+
+  /* CHESS.COM GREEN BUTTON */
+  .join-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--chess-green);
+    color: #fff;
+    padding: 14px;
+    border-radius: 4px;
+    font-weight: 900;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 4px 0 #457520;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  .join-btn:hover {
+    background-color: var(--chess-green-hover);
+  }
+
+  .join-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #457520;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--chess-text-muted);
+    margin-top: 12px;
+  }
+</style>
+
+<div class="chess-sidebar">
+  <div class="club-header-img">
+    </div>
+
+  <div class="sidebar-content">
+    <div class="club-name">The Club Of 195 Countries</div>
+    <div class="club-stats">
+      <span id="memberCount">...</span> Members • <span style="color: var(--chess-green);">●</span> Online Now
+    </div>
+
+    <div class="section-label">Club Founder</div>
+    <div class="founder-card" onclick="window.open('https://www.chess.com/member/chess_by_ayus', '_blank');">
+      <img src="https://images.chesscomfiles.com/uploads/v1/user/512569247.ec08cafb.48x48o.e2abe24d14ad@2x.jpg" class="founder-avatar">
+      <div class="founder-info">
+        <div class="name">Chess_By_Ayus</div>
+        <div class="role">International Leader</div>
+      </div>
+    </div>
+
+    <div class="section-label">About Us</div>
+    <div class="club-desc">
+      Join the ultimate global arena! We are uniting chess players from every single nation. Represent your flag, compete in international leagues, and prove your country is the best.
+    </div>
+
+    <a href="https://www.chess.com/club/the-club-of-195-countries/join" target="_blank" class="join-btn">
+      Join Club
+    </a>
+
+    <div class="footer-note">
+      Public Club • Free to Join
+    </div>
+  </div>
+</div>
+
+<script>
+  async function fetchSidebarStats() {
+    const slug = 'the-club-of-195-countries';
+    const display = document.getElementById('memberCount');
+    try {
+      const res = await fetch(`https://api.chess.com/pub/club/${slug}`);
+      const data = await res.json();
+      if (data.members_count) {
+        display.innerText = data.members_count.toLocaleString();
+      } else {
+        display.innerText = "195+";
+      }
+    } catch (e) {
+      display.innerText = "Active";
+    }
+  }
+  fetchSidebarStats();
+</script>
