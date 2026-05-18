@@ -1,0 +1,83 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Fredoka+One&display=swap" rel="stylesheet">
+
+<style>
+  /* NEW INTENSE RED LIVE DOT */
+  .live-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ff9e9e, #ff3b3b 45%, #d50000 100%);
+    position: relative;
+    box-shadow: 0 0 0 3px rgba(255,59,59,.18), 0 0 12px rgba(255,59,59,.7), 0 0 24px rgba(255,0,0,.35);
+    animation: livePulse 1.2s ease-in-out infinite;
+  }
+
+  /* OUTER RING */
+  .live-dot::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,80,80,.45);
+    animation: ringPulse 1.6s linear infinite;
+  }
+
+  /* DOT PULSE ANIMATION */
+  @keyframes livePulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 3px rgba(255,59,59,.18), 0 0 12px rgba(255,59,59,.7), 0 0 24px rgba(255,0,0,.35);
+    }
+    50% {
+      transform: scale(1.18);
+      box-shadow: 0 0 0 6px rgba(255,59,59,.08), 0 0 18px rgba(255,59,59,.95), 0 0 34px rgba(255,0,0,.55);
+    }
+  }
+
+  /* RING PULSE ANIMATION */
+  @keyframes ringPulse {
+    0% { transform: scale(.6); opacity: .9; }
+    70% { transform: scale(1.4); opacity: 0; }
+    100% { opacity: 0; }
+  }
+</style>
+
+<div style="perspective: 1000px; margin: 20px auto; max-width: 600px; font-family: 'Nunito', sans-serif; user-select: none;">
+  
+  <div onmouseover="this.style.transform='translateY(-5px) rotateX(2deg)'; this.style.boxShadow='0 20px 0 #9c3314, 0 30px 50px rgba(0,0,0,0.3)';"
+       onmouseout="this.style.transform='translateY(0) rotateX(0deg)'; this.style.boxShadow='0 12px 0 #9c3314, 0 20px 40px rgba(0,0,0,0.25)';"
+       style="background: #e64a19; padding: 8px; border-radius: 35px; box-shadow: 0 12px 0 #9c3314, 0 20px 40px rgba(0,0,0,0.25); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: default;">
+
+    <div style="background: #fffcf5; border-radius: 30px; padding: 40px 20px; border-bottom: 4px solid #f0e6d2; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;">
+      
+      <div style="position: absolute; top: 10px; left: 20px; font-size: 30px; opacity: 0.2; transform: rotate(-15deg);">🌶️</div>
+      <div style="position: absolute; bottom: 10px; right: 20px; font-size: 30px; opacity: 0.2; transform: rotate(15deg);">♟️</div>
+
+      <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+        <div class="live-dot"></div>
+        <div style="color: #e64a19; font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px;">
+          Welcome to
+        </div>
+      </div>
+        
+      <div style="text-align: center; position: relative; z-index: 2;">
+        <div style="font-family: 'Fredoka One', cursive; font-size: 42px; color: #6b1a0e; line-height: 1; text-shadow: 3px 3px 0 #f9d8d1;">
+          OUR CLUB
+        </div>
+
+        <div style="width: 60px; height: 6px; background: #e64a19; margin: 20px auto; border-radius: 10px; box-shadow: 0 3px 0 #9c3314;"></div>
+        
+        <div style="color: #9c3314; font-weight: 800; font-size: 16px; opacity: 0.8;">
+          Anime Lovers • Chess Masters • Community
+        </div>
+      </div>
+
+      <div onmouseover="this.style.background='#e64a19'; this.style.color='#fff'; this.style.transform='scale(1.1)';"
+           onmouseout="this.style.background='#f9d8d1'; this.style.color='#6b1a0e'; this.style.transform='scale(1)';"
+           style="margin-top: 25px; background: #f9d8d1; color: #6b1a0e; padding: 8px 20px; border-radius: 50px; font-weight: 900; font-size: 12px; text-transform: uppercase; transition: all 0.2s; cursor: pointer;">
+        Join the Heat 🔥
+      </div>
+
+    </div>
+  </div>
+</div>
