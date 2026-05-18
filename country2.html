@@ -1,0 +1,143 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+
+<style>
+  /* GLOBAL ANIMATIONS */
+  @keyframes statusPulseGlobal {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+  }
+
+  @keyframes floatGlobal {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
+  }
+
+  @keyframes progressGlobal {
+    0% { width: 0%; }
+    100% { width: 92%; }
+  }
+
+  .floating-world { animation: floatGlobal 4s ease-in-out infinite; pointer-events: none; }
+  
+  .glass-shine-sidebar { position: relative; overflow: hidden; }
+  .glass-shine-sidebar::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -150%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: rotate(45deg);
+    transition: 0.8s;
+    pointer-events: none;
+  }
+  .sidebar-card:hover .glass-shine-sidebar::after { left: 100%; }
+
+  .global-benefit { transition: all 0.2s ease; border: 2px solid transparent; }
+  .global-benefit:hover { background: #fff !important; border-color: #1d4ed8 !important; transform: translateX(5px); }
+</style>
+
+<div style="perspective: 1000px; margin: 20px auto; max-width: 320px; font-family: 'Nunito', sans-serif; user-select: none;">
+  
+  <div class="sidebar-card"
+       onmouseover="this.style.transform='rotateY(-3deg) translateX(5px)';"
+       onmouseout="this.style.transform='rotateY(0deg) translateX(0)';"
+       style="background: #1e3a8a; border-radius: 35px; padding: 10px; box-shadow: -8px 12px 0 #1e1b4b, 0 20px 40px rgba(0,0,0,0.4); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative;">
+
+    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #1e1b4b; padding: 4px 20px; border-radius: 15px; border: 3px solid #1e3a8a; z-index: 5; pointer-events: none;">
+        <div style="width: 30px; height: 5px; background: rgba(255,255,255,0.2); border-radius: 10px;"></div>
+    </div>
+
+    <div style="position: absolute; top: 10px; right: -8px; background: #fbbf24; color: #1e1b4b; padding: 6px 12px; border-radius: 12px; font-weight: 900; font-size: 11px; transform: rotate(5deg); box-shadow: 0 4px 0 #b45309; z-index: 10; pointer-events: none;">
+      WORLDWIDE 🌎
+    </div>
+
+    <div class="glass-shine-sidebar" style="background: #f8fafc; border-radius: 28px; padding: 25px 18px; position: relative; border-bottom: 5px solid #e2e8f0; z-index: 1;">
+      
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="color: #1d4ed8; font-weight: 900; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;">Join the Global Elite</div>
+        <div style="font-family: 'Fredoka One', cursive; font-size: 24px; color: #1e1b4b; line-height: 1.1;">UNITE THE WORLD</div>
+      </div>
+
+      <div onclick="window.open('https://www.chess.com/member/chess_by_ayus', '_blank');"
+           onmouseover="this.style.background='#eff6ff'; this.style.borderColor='#1d4ed8';"
+           onmouseout="this.style.background='white'; this.style.borderColor='#e2e8f0';"
+           style="background: white; border: 2px solid #e2e8f0; border-radius: 20px; padding: 12px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; position: relative; z-index: 20;">
+        
+        <div style="position: relative;">
+          <img src="https://images.chesscomfiles.com/uploads/v1/user/512569247.ec08cafb.48x48o.e2abe24d14ad@2x.jpg" 
+               style="width: 50px; height: 50px; border-radius: 15px; border: 3px solid #1d4ed8; object-fit: cover;">
+          <div style="position: absolute; bottom: -2px; right: -2px; width: 16px; height: 16px; background: #fbbf24; border-radius: 50%; border: 3px solid white; animation: statusPulseGlobal 2.2s infinite;"></div>
+        </div>
+
+        <div style="flex-grow: 1;">
+          <div style="font-weight: 900; color: #1e1b4b; font-size: 15px;">Chess_By_Ayus</div>
+          <div style="font-size: 10px; color: #1d4ed8; font-weight: 800; text-transform: uppercase;">Global Ambassador</div>
+          <div style="width: 100%; height: 6px; background: #f1f5f9; border-radius: 10px; margin-top: 5px; overflow: hidden;">
+            <div style="height: 100%; background: #fbbf24; width: 92%; border-radius: 10px; animation: progressGlobal 2s ease-out;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;">
+        <div style="background: #fff; border: 2px solid #1d4ed8; border-radius: 15px; padding: 10px; text-align: center;">
+          <div id="worldCount" style="font-family: 'Fredoka One', cursive; color: #1d4ed8; font-size: 20px;">...</div>
+          <div style="font-size: 9px; font-weight: 900; color: #64748b; text-transform: uppercase;">Nations Represented</div>
+        </div>
+      </div>
+
+      <p style="color: #475569; font-weight: 800; font-size: 13px; margin: 0 0 20px 0; line-height: 1.4; text-align: center;">
+        Battle for your flag! Represent your country in the ultimate international chess arena and unite with players from 195 nations.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 25px;">
+        <div class="global-benefit" style="display: flex; align-items: center; gap: 10px; background: rgba(29, 78, 216, 0.05); padding: 10px; border-radius: 15px;">
+          <span style="font-size: 18px;">🚩</span>
+          <span style="font-weight: 900; color: #1e1b4b; font-size: 12px;">NATIONAL TEAM LEAGUES</span>
+        </div>
+        <div class="global-benefit" style="display: flex; align-items: center; gap: 10px; background: rgba(29, 78, 216, 0.05); padding: 10px; border-radius: 15px;">
+          <span style="font-size: 18px;">🌎</span>
+          <span style="font-weight: 900; color: #1e1b4b; font-size: 12px;">CROSS-BORDER EVENTS</span>
+        </div>
+      </div>
+
+      <div onclick="window.open('https://www.chess.com/club/the-club-of-195-countries/join', '_blank');"
+           onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 0 #1e3a8a';"
+           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 0 #1e3a8a';"
+           onmousedown="this.style.transform='translateY(2px)'; this.style.boxShadow='0 2px 0 #1e3a8a';"
+           style="background: #1d4ed8; color: white; padding: 18px; border-radius: 20px; font-weight: 900; font-size: 16px; cursor: pointer; transition: all 0.2s; box-shadow: 0 5px 0 #1e3a8a; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 50;">
+        REPRESENT YOUR FLAG <span style="font-size: 20px;">→</span>
+      </div>
+
+      <div style="margin-top: 12px; font-size: 10px; font-weight: 900; color: #94a3b8; text-align: center; text-transform: uppercase;">
+        Global Membership • Free to join
+      </div>
+
+      <div class="floating-world" style="position: absolute; top: 10px; left: 10px; font-size: 22px; opacity: 0.4;">🌍</div>
+      <div class="floating-world" style="position: absolute; bottom: 80px; right: -10px; font-size: 28px; animation-delay: 2s; opacity: 0.6;">🗺️</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  async function fetchGlobalStats() {
+    const slug = 'the-club-of-195-countries';
+    const display = document.getElementById('worldCount');
+    try {
+      const res = await fetch(`https://api.chess.com/pub/club/${slug}`);
+      const data = await res.json();
+      // If club exists, display member count, otherwise generic "195"
+      if (data.members_count) {
+        display.innerText = data.members_count.toLocaleString();
+      } else {
+        display.innerText = "195+";
+      }
+    } catch (e) {
+      display.innerText = "READY";
+    }
+  }
+  fetchGlobalStats();
+</script>
