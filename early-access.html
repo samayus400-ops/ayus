@@ -1,0 +1,108 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+
+<style>
+  .live-dot {
+    width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34,197,94,.25);
+    animation: livePulse 1.8s ease-in-out infinite; flex-shrink: 0;
+  }
+  @keyframes livePulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,.25); }
+    50% { box-shadow: 0 0 0 6px rgba(34,197,94,.1); }
+  }
+  .live-label { font-size: 11px; font-weight: 900; color: #9a2010; text-transform: uppercase; letter-spacing: .8px; white-space: nowrap; flex-shrink: 0; }
+  .live-count { font-family: 'Fredoka One', cursive; font-size: 20px; color: #d93020; text-shadow: 0 1px 0 rgba(0,0,0,.08); line-height: 1; white-space: nowrap; flex-shrink: 0; }
+  .live-sub { font-size: 10px; font-weight: 700; color: #e8aa98; white-space: nowrap; flex-shrink: 0; }
+</style>
+
+<div style="font-family: 'Nunito', sans-serif; display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 20px auto; user-select: none;">
+
+  <div style="display: flex; align-items: center; justify-content: center; gap: 12px; background: #fffcf5; padding: 10px; border-radius: 16px; border: 2px dashed #f9d8d1; margin-bottom: 5px;">
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <div id="statusDot" class="live-dot"></div>
+      <div id="statusText" class="live-label">STATUS: ACTIVE</div>
+    </div>
+    <div style="width: 1px; height: 20px; background: #f9d8d1;"></div>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <div id="memberCount" class="live-count">0</div>
+      <div class="live-sub">Members</div>
+    </div>
+  </div>
+
+  <div style="text-align: center; color: #e64a19; font-weight: 900; font-size: 14px; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase;">
+    Get early access to:
+  </div>
+
+  <div onclick="window.location.href='#'" 
+       onmouseover="this.style.borderColor='#e64a19'; this.style.boxShadow='0 8px 0 #9c3314'; this.style.transform='translateY(-4px)';" 
+       onmouseout="this.style.borderColor='#f9d8d1'; this.style.boxShadow='0 6px 0 #f9d8d1'; this.style.transform='translateY(0)';" 
+       onmousedown="this.style.transform='translateY(4px)'; this.style.boxShadow='0 2px 0 #9c3314';"
+       onmouseup="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 0 #9c3314';"
+       style="background: #fffcf5; border: 3px solid #f9d8d1; border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 6px 0 #f9d8d1;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 20px;">📜</span>
+      <span style="color: #6b1a0e; font-weight: 800; font-size: 16px;">Club Rules</span>
+    </div>
+    <span style="color: #e64a19; font-weight: 900; font-size: 18px;">›</span>
+  </div>
+
+  <div onclick="window.location.href='#'" 
+       onmouseover="this.style.borderColor='#e64a19'; this.style.boxShadow='0 8px 0 #9c3314'; this.style.transform='translateY(-4px)';" 
+       onmouseout="this.style.borderColor='#f9d8d1'; this.style.boxShadow='0 6px 0 #f9d8d1'; this.style.transform='translateY(0)';" 
+       onmousedown="this.style.transform='translateY(4px)'; this.style.boxShadow='0 2px 0 #9c3314';"
+       onmouseup="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 0 #9c3314';"
+       style="background: #fffcf5; border: 3px solid #f9d8d1; border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 6px 0 #f9d8d1;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 20px;">🏆</span>
+      <span style="color: #6b1a0e; font-weight: 800; font-size: 16px;">Leaderboard</span>
+    </div>
+    <span style="color: #e64a19; font-weight: 900; font-size: 18px;">›</span>
+  </div>
+
+  <div onclick="window.location.href='#'" 
+       onmouseover="this.style.borderColor='#e64a19'; this.style.boxShadow='0 8px 0 #9c3314'; this.style.transform='translateY(-4px)';" 
+       onmouseout="this.style.borderColor='#f9d8d1'; this.style.boxShadow='0 6px 0 #f9d8d1'; this.style.transform='translateY(0)';" 
+       onmousedown="this.style.transform='translateY(4px)'; this.style.boxShadow='0 2px 0 #9c3314';"
+       onmouseup="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 0 #9c3314';"
+       style="background: #fffcf5; border: 3px solid #f9d8d1; border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 6px 0 #f9d8d1;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 20px;">🚀</span>
+      <span style="color: #6b1a0e; font-weight: 800; font-size: 16px;">Features</span>
+    </div>
+    <span style="color: #e64a19; font-weight: 900; font-size: 18px;">›</span>
+  </div>
+
+  <div onclick="window.location.href='#'" 
+       onmouseover="this.style.borderColor='#e64a19'; this.style.boxShadow='0 8px 0 #9c3314'; this.style.transform='translateY(-4px)';" 
+       onmouseout="this.style.borderColor='#f9d8d1'; this.style.boxShadow='0 6px 0 #f9d8d1'; this.style.transform='translateY(0)';" 
+       onmousedown="this.style.transform='translateY(4px)'; this.style.boxShadow='0 2px 0 #9c3314';"
+       onmouseup="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 0 #9c3314';"
+       style="background: #fffcf5; border: 3px solid #f9d8d1; border-radius: 18px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 6px 0 #f9d8d1;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 20px;">🤝</span>
+      <span style="color: #6b1a0e; font-weight: 800; font-size: 16px;">Partnered Clubs</span>
+    </div>
+    <span style="color: #e64a19; font-weight: 900; font-size: 18px;">›</span>
+  </div>
+
+</div>
+
+<script>
+  async function fetchClubData() {
+    const clubSlug = 'anime-lovers-chess-club-1';
+    const countEl = document.getElementById('memberCount');
+
+    try {
+      const response = await fetch(`https://api.chess.com/pub/club/${clubSlug}`);
+      const data = await response.json();
+
+      if (data.members_count) {
+        countEl.innerText = data.members_count.toLocaleString();
+      }
+    } catch (e) {
+      countEl.innerText = "!";
+      console.error("API Fetch Failed");
+    }
+  }
+  fetchClubData();
+</script>
